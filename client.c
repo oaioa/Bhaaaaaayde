@@ -1,6 +1,4 @@
-/*
-   Simple udp client
-http://www.binarytides.com/programming-udp-sockets-c-linux/
+/*http://www.binarytides.com/programming-udp-sockets-c-linux/
 */
 #include "useful.h"
 
@@ -18,10 +16,8 @@ int main(void){
     s = make_socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     set_sockaddr_in(&si_other,PORT,0);
 
-    if (inet_aton(SERVER , &si_other.sin_addr) == 0) {
-        fprintf(stderr, "inet_aton() failed\n");
-        exit(1);
-    }
+    store_adress(SERVER , &si_other.sin_addr);
+
     while(1){
         if(compare == 0){ //connexion acceptée
             printf("Enter message : ");

@@ -1,13 +1,11 @@
-/*
-   Simple udp server
-http://www.binarytides.com/programming-udp-sockets-c-linux/
+/*http://www.binarytides.com/programming-udp-sockets-c-linux/
 */
 
 #include "useful.h"
 
 int main(void){
-    struct sockaddr_in si_me;
-    struct sockaddr_in si_other;
+    struct sockaddr_in si_me; //server struct addr 
+    struct sockaddr_in si_other;//client struct addr
     int s; //SOCKET
     int i; //ITERATOR
     int slen = sizeof(si_other);
@@ -25,13 +23,10 @@ int main(void){
     set_sockaddr_in(&si_me,PORT,INADDR_ANY);
 
     set_bind(s,&si_me,sizeof(si_me));
-    
     int compare = 1 ; // il ya une difference
-
     //keep listening for data
     while(1){
         printf("I am %d Waiting for data...\n",getpid());
-
         delete(buf,recv_len);
         receive_message(s, buf,(struct sockaddr *) &si_other, &slen);
 

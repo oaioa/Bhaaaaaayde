@@ -52,10 +52,18 @@ int set_sockaddr_in(struct sockaddr_in *sin,int port,int address){
 
 //send the message
 int send_message(int socket,char message[BUFLEN], size_t message_len,struct sockaddr *si_other,int si_other_len){
-    if (sendto(socket, message, message_len , 0 , (struct sockaddr *) si_other,si_other_len)==-1)
-    {
+    if (sendto(socket, message, message_len , 0 , (struct sockaddr *) si_other,si_other_len)==-1){
         die("sendto()");
         return 1;
+    }
+    return 0;
+}
+
+//converts the address and store it in struct
+int store_adress(char * adress, struct in_addr * sin){
+    if (inet_aton(adress , sin) == 0) {
+        fprintf(stderr, "inet_aton() failed\n");
+        exit(1);
     }
     return 0;
 }
